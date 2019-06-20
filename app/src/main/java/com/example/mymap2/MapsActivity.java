@@ -95,8 +95,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         service.get("467adf7590503f0a94576ae678367ff0", let.latitude+"", let.longitude+"").enqueue(new Callback<weatherAPI>() {
             @Override
             public void onResponse(Call<weatherAPI> call, Response<weatherAPI> response) {
-                System.out.println((response.body().getmMain().getmTemp() - 273));
-                tx3.setText((response.body().getmMain().getmTemp() - 273) + "");
+                if (response.isSuccessful()) {
+                    System.out.println((response.body().getmMain().getmTemp() - 273));
+                    tx3.setText((response.body().getmMain().getmTemp() - 273) + "");
+                }
             }
             @Override
             public void onFailure(Call<weatherAPI> call, Throwable t) {
